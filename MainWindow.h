@@ -29,16 +29,23 @@ private:
     shared_ptr<QWidget> mainWidget;
     shared_ptr<QVBoxLayout> mainLayout;
 
+    // Here will show current temperature
     shared_ptr<QHBoxLayout> infoInterfaceLayout;
     shared_ptr<QLabel> lbCurrentTemperature;
 
+    // Here will show more information
     shared_ptr<QVBoxLayout> moreInfoLayout;
     shared_ptr<QLabel> lbRealTemperature;
     shared_ptr<QLabel> lbWindSpeed;
+    shared_ptr<QLabel> lbMain;
+    shared_ptr<QLabel> lbDescription;
+
+    shared_ptr<WeatherData> weatherData;
 
     shared_ptr<QPushButton> btnUpdate;
 
-
+    QFont temperatureFont;
+    QFont moreInfoFont;
 
 };
 #endif // MAINWINDOW_H
