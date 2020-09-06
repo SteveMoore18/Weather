@@ -8,7 +8,7 @@ WeatherData::WeatherData()
 
 WeatherData::~WeatherData()
 {
-    delete reply;
+    //delete reply;
 }
 
 void WeatherData::makeRequest(const QString city)
@@ -34,6 +34,10 @@ void WeatherData::makeRequest(const QString city)
 //    QByteArray arr = f.readAll();
 //    f.close();
 
+    if (!checkResponse(responseData)) {
+        return;
+    }
+
     writeToDATAStruct(responseData);
 
     reply->deleteLater();
@@ -42,6 +46,16 @@ void WeatherData::makeRequest(const QString city)
 shared_ptr<WeatherData::DATA> WeatherData::getData() const
 {
     return data;
+}
+
+QString WeatherData::getResponseCode() const
+{
+    return responseCode;
+}
+
+QString WeatherData::getErrorMessage() const
+{
+    return errorMessage;
 }
 
 
@@ -95,4 +109,31 @@ void WeatherData::writeToDATAStruct(const QByteArray & arrData)
 double WeatherData::kelvinToCelsius(const double value)
 {
     return value - 273.15;
+}
+
+bool WeatherData::checkResponse(const QByteArray &arrData)
+{
+    QJsonDocument doc = QJsonDocument::fromJson(arrData);
+    QJsonObject jsonObj = doc.object();
+    QJsonValue tempResponseCode = jsonObj["cod"];
+
+    if (tempResponseCode.type() == QJsonValue::Type::Double) {
+
+        double t = tempResponseCode.toDouble();
+        responseCode = QString("%1").arg(t);
+
+    } else if (tempResponseCode.type() == QJsonValue::Type::String) {
+
+        responseCode = tempResponseCode.toString();
+
+    }
+
+
+    if (responseCode != "200") {
+        errorMessage = jsonObj["message"].toString();
+        return false;
+    }
+
+    return true;
+
 }

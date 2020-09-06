@@ -34,6 +34,10 @@ public:
 
     shared_ptr<DATA> getData() const;
 
+    QString getResponseCode() const;
+
+    QString getErrorMessage() const;
+
 private:
 
 
@@ -49,10 +53,15 @@ private:
     QNetworkAccessManager accessManeger;
     QNetworkReply *reply;
 
+    QString responseCode;
+    QString errorMessage;
+
 private:
     void writeToDATAStruct(const QByteArray & arrData);
 
     double kelvinToCelsius(const double value);
+
+    bool checkResponse(const QByteArray & arrData);
 
 };
 

@@ -6,6 +6,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     mainWidget = shared_ptr<QWidget>(new QWidget());
     mainLayout = shared_ptr<QVBoxLayout>(new QVBoxLayout());
+    lnCity = shared_ptr<QLineEdit>(new QLineEdit());
+    lnCity->setText("Moscow");
+    mainLayout->addWidget(lnCity.get());
+
+    lbCurrentCity = shared_ptr<QLabel>(new QLabel());
+    lbCurrentCity->setText("");
+    mainLayout->addWidget(lbCurrentCity.get());
 
     infoInterfaceLayout = shared_ptr<QHBoxLayout>(new QHBoxLayout());
 
@@ -33,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     lbWindSpeed->setFont(moreInfoFont);
     lbMain->setFont(moreInfoFont);
     lbDescription->setFont(moreInfoFont);
+    lbCurrentCity->setFont(moreInfoFont);
 
     infoInterfaceLayout->addWidget(lbCurrentTemperature.get());
     moreInfoLayout->addWidget(lbRealTemperature.get());
@@ -46,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     mainWidget->setLayout(mainLayout.get());
     setCentralWidget(mainWidget.get());
 
-    onBtnUpdateClicked();
+    //onBtnUpdateClicked();
 }
 
 MainWindow::~MainWindow()
@@ -56,13 +64,26 @@ MainWindow::~MainWindow()
 
 void MainWindow::onBtnUpdateClicked()
 {
-    weatherData->makeRequest("Moscow");
+
+    weatherData->makeRequest(lnCity->text());
+
 
     const int currTemp = weatherData->getData()->currentTemperature;
     const int realTemp = weatherData->getData()->realTemperature;
     const unsigned int windSpeed = weatherData->getData()->windSpeed;
     const QString main = weatherData->getData()->main;
     const QString description = weatherData->getData()->description;
+
+    if (weatherData->getResponseCode() != "200") {
+
+        QMessageBox msg;
+        msg.setText("Error: " + weatherData->getErrorMessage());
+        msg.exec();
+
+        return;
+    }
+
+    lbCurrentCity->setText(lnCity->text());
 
     lbCurrentTemperature->setText(QString("%1 °C").arg(currTemp));
     lbRealTemperature->setText(QString("Feels like:  \t%1 °C").arg(realTemp));

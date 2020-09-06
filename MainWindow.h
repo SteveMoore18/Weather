@@ -7,6 +7,9 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QDebug>
+#include <QLineEdit>
+#include <QMessageBox>
+
 #include <WeatherData.h>
 
 #include <thread>
@@ -28,6 +31,8 @@ private:
 
     shared_ptr<QWidget> mainWidget;
     shared_ptr<QVBoxLayout> mainLayout;
+    shared_ptr<QLineEdit> lnCity;
+    shared_ptr<QLabel> lbCurrentCity;
 
     // Here will show current temperature
     shared_ptr<QHBoxLayout> infoInterfaceLayout;
