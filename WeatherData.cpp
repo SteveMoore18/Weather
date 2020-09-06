@@ -76,13 +76,17 @@ void WeatherData::writeToDATAStruct(const QByteArray & arrData)
 
     QJsonObject jsonObj = document.object();
 
-    // Getting main and description weather
+    // Getting main and description weather and icon
     {
         QJsonArray weatherArr = jsonObj["weather"].toArray();
         QJsonObject weatherObj = weatherArr[0].toObject();
 
         data->description = weatherObj["description"].toString();
         data->main = weatherObj["main"].toString();
+
+        QString iconCode = weatherObj["icon"].toString();
+        data->icon = QPixmap(QString(":/icons/icons/%1@2x.png").arg(iconCode));
+        data->icon = data->icon.scaled(200, 200);
     }
 
     // Getting temperature, real temperature
@@ -98,11 +102,12 @@ void WeatherData::writeToDATAStruct(const QByteArray & arrData)
         data->windSpeed = windObj["speed"].toDouble();
     }
 
-    qDebug() << data->main;
-    qDebug() << data->description;
-    qDebug() << "Current temp: " << data->currentTemperature;
-    qDebug() << "Real temp: " << data->realTemperature;
-    qDebug() << "Wind speed: " << data->windSpeed << " m/s";
+
+//    qDebug() << data->main;
+//    qDebug() << data->description;
+//    qDebug() << "Current temp: " << data->currentTemperature;
+//    qDebug() << "Real temp: " << data->realTemperature;
+//    qDebug() << "Wind speed: " << data->windSpeed << " m/s";
 
 }
 

@@ -2,4 +2,24 @@
     <qresource prefix="/fonts">
         <file>Fonts/Proxima Nova Alt Regular.otf</file>
     </qresource>
+    <qresource prefix="/icons">
+        <file>icons/01d@2x.png</file>
+        <file>icons/01n@2x.png</file>
+        <file>icons/02d@2x.png</file>
+        <file>icons/02n@2x.png</file>
+        <file>icons/03d@2x.png</file>
+        <file>icons/03n@2x.png</file>
+        <file>icons/04d@2x.png</file>
+        <file>icons/04n@2x.png</file>
+        <file>icons/09d@2x.png</file>
+        <file>icons/09n@2x.png</file>
+        <file>icons/10d@2x.png</file>
+        <file>icons/10n@2x.png</file>
+        <file>icons/11d@2x.png</file>
+        <file>icons/11n@2x.png</file>
+        <file>icons/13d@2x.png</file>
+        <file>icons/13n@2x.png</file>
+        <file>icons/50d@2x.png</file>
+        <file>icons/50n@2x.png</file>
+    </qresource>
 </RCC>

@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
     lbMain = shared_ptr<QLabel>(new QLabel("None"));
     lbDescription = shared_ptr<QLabel>(new QLabel("None"));
 
+
+
     lbCurrentTemperature->setAlignment(Qt::AlignCenter);
 
     btnUpdate = shared_ptr<QPushButton>(new QPushButton("Update"));
@@ -34,6 +36,10 @@ MainWindow::MainWindow(QWidget *parent)
     lbCurrentTemperature->setFont(temperatureFont);
     lbCurrentTemperature->setMinimumWidth(150);
 
+    lbImageWeather = shared_ptr<QLabel>(new QLabel());
+    lbImageWeather->setAlignment(Qt::AlignCenter);
+    //lbImageWeather->setPixmap(QPixmap(":/icons/icons/04d@2x.png"));
+
     moreInfoFont = temperatureFont;
     moreInfoFont.setPixelSize(18);
     lbRealTemperature->setFont(moreInfoFont);
@@ -42,7 +48,13 @@ MainWindow::MainWindow(QWidget *parent)
     lbDescription->setFont(moreInfoFont);
     lbCurrentCity->setFont(moreInfoFont);
 
-    infoInterfaceLayout->addWidget(lbCurrentTemperature.get());
+    currentTemeratureLayout = shared_ptr<QVBoxLayout>(new QVBoxLayout);
+
+    currentTemeratureLayout->addWidget(lbCurrentTemperature.get());
+    currentTemeratureLayout->addWidget(lbImageWeather.get());
+
+    infoInterfaceLayout->addLayout(currentTemeratureLayout.get());
+
     moreInfoLayout->addWidget(lbRealTemperature.get());
     moreInfoLayout->addWidget(lbWindSpeed.get());
     moreInfoLayout->addWidget(lbMain.get());
@@ -73,6 +85,7 @@ void MainWindow::onBtnUpdateClicked()
     const unsigned int windSpeed = weatherData->getData()->windSpeed;
     const QString main = weatherData->getData()->main;
     const QString description = weatherData->getData()->description;
+    const QPixmap icon = weatherData->getData()->icon;
 
     if (weatherData->getResponseCode() != "200") {
 
@@ -90,6 +103,7 @@ void MainWindow::onBtnUpdateClicked()
     lbWindSpeed->setText(QString("Wind speed:  \t%1 m/s").arg(windSpeed));
     lbMain->setText(QString("%1").arg(main));
     lbDescription->setText(QString("%1").arg(description));
+    lbImageWeather->setPixmap(icon);
 
 }
 

@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QLineEdit>
 #include <QMessageBox>
+#include <QPixmap>
 
 #include <WeatherData.h>
 
@@ -36,7 +37,9 @@ private:
 
     // Here will show current temperature
     shared_ptr<QHBoxLayout> infoInterfaceLayout;
+    shared_ptr<QVBoxLayout> currentTemeratureLayout;
     shared_ptr<QLabel> lbCurrentTemperature;
+    shared_ptr<QLabel> lbImageWeather;
 
     // Here will show more information
     shared_ptr<QVBoxLayout> moreInfoLayout;

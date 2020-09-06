@@ -3,7 +3,7 @@
 
 #include <QDebug>
 #include <QtNetwork>
-
+#include <QPixmap>
 
 using namespace std;
 
@@ -16,6 +16,7 @@ class WeatherData
         double windSpeed; // m/s
         QString main;
         QString description;
+        QPixmap icon;
 
         DATA() {
             currentTemperature = 0;
