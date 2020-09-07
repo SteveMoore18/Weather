@@ -67,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->addWidget(btnUpdate.get());
     mainWidget->setLayout(mainLayout.get());
     setCentralWidget(mainWidget.get());
+    //mainWidget->setWindowIcon(QIcon(":/icons/icons/AppIcon/app.ico"));
 
     //onBtnUpdateClicked();
 }

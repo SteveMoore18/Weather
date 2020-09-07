@@ -18,7 +18,7 @@ void WeatherData::makeRequest(const QString city)
     request = QNetworkRequest(OUT_LINK);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    reply = accessManeger.get(request);
+    QNetworkReply *reply = accessManeger.get(request);
 
     while (!reply->isFinished()) {
         qApp->processEvents();
@@ -41,6 +41,7 @@ void WeatherData::makeRequest(const QString city)
     writeToDATAStruct(responseData);
 
     reply->deleteLater();
+    delete reply;
 }
 
 shared_ptr<WeatherData::DATA> WeatherData::getData() const

@@ -21,6 +21,7 @@
         <file>icons/13n@2x.png</file>
         <file>icons/50d@2x.png</file>
         <file>icons/50n@2x.png</file>
+        <file>icons/AppIcon/app.ico</file>
     </qresource>
     <qresource prefix="/css">
         <file>CSS/ButtonStyle.css</file>

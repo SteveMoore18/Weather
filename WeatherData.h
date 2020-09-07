@@ -52,7 +52,6 @@ private:
 
     QNetworkRequest request;
     QNetworkAccessManager accessManeger;
-    QNetworkReply *reply;
 
     QString responseCode;
     QString errorMessage;
