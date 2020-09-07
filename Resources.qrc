@@ -22,4 +22,9 @@
         <file>icons/50d@2x.png</file>
         <file>icons/50n@2x.png</file>
     </qresource>
+    <qresource prefix="/css">
+        <file>CSS/ButtonStyle.css</file>
+        <file>CSS/LineEditStyle.css</file>
+        <file>CSS/Label.css</file>
+    </qresource>
 </RCC>

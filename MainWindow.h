@@ -10,8 +10,12 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPixmap>
+#include <QApplication>
+#include <QEvent>
 
-#include <WeatherData.h>
+#include "WeatherData.h"
+#include "Appearance/WidgetStyle.h"
+
 
 #include <thread>
 
@@ -49,11 +53,16 @@ private:
     shared_ptr<QLabel> lbDescription;
 
     shared_ptr<WeatherData> weatherData;
+    shared_ptr<WidgetStyle> widgetStyle;
 
     shared_ptr<QPushButton> btnUpdate;
 
     QFont temperatureFont;
     QFont moreInfoFont;
+
+
+private:
+    void stylize();
 
 };
 #endif // MAINWINDOW_H

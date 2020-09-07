@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(btnUpdate.get(), &QPushButton::clicked, this, &MainWindow::onBtnUpdateClicked);;
 
     weatherData = shared_ptr<WeatherData>(new WeatherData());
+    widgetStyle = shared_ptr<WidgetStyle>(new WidgetStyle());
 
     temperatureFont = QFont(":/fonts/Fonts/Proxima Nova Alt Regular.otf", 36);
     lbCurrentTemperature->setFont(temperatureFont);
@@ -38,7 +39,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     lbImageWeather = shared_ptr<QLabel>(new QLabel());
     lbImageWeather->setAlignment(Qt::AlignCenter);
-    //lbImageWeather->setPixmap(QPixmap(":/icons/icons/04d@2x.png"));
 
     moreInfoFont = temperatureFont;
     moreInfoFont.setPixelSize(18);
@@ -59,6 +59,8 @@ MainWindow::MainWindow(QWidget *parent)
     moreInfoLayout->addWidget(lbWindSpeed.get());
     moreInfoLayout->addWidget(lbMain.get());
     moreInfoLayout->addWidget(lbDescription.get());
+
+    stylize();
 
     mainLayout->addLayout(infoInterfaceLayout.get());
     infoInterfaceLayout->addLayout(moreInfoLayout.get());
@@ -104,6 +106,23 @@ void MainWindow::onBtnUpdateClicked()
     lbMain->setText(QString("%1").arg(main));
     lbDescription->setText(QString("%1").arg(description));
     lbImageWeather->setPixmap(icon);
+
+}
+
+void MainWindow::stylize()
+{
+    btnUpdate->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::BUTTON));
+    lnCity->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::LINEEDIT));
+
+    lbCurrentCity->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::LABEL));
+    lbCurrentTemperature->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::LABEL));
+    lbImageWeather->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::LABEL));
+    lbRealTemperature->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::LABEL));lbRealTemperature->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::LABEL));
+    lbWindSpeed->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::LABEL));
+    lbMain->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::LABEL));
+    lbDescription->setStyleSheet(widgetStyle->getStyle(WidgetStyle::WidgetName::LABEL));
+
+    mainWidget->setStyleSheet("QWidget { background: white; }");
 
 }
 
