@@ -69,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(mainWidget.get());
     //mainWidget->setWindowIcon(QIcon(":/icons/icons/AppIcon/app.ico"));
 
-    //onBtnUpdateClicked();
+    onBtnUpdateClicked();
 }
 
 MainWindow::~MainWindow()
